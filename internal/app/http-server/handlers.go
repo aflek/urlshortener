@@ -61,9 +61,9 @@ func (server *UsApp) FindShortUrl(c *gin.Context) {
 		}
 	}()
 
-	shortUrl := c.Param("id")
+	shortURL := c.Param("id")
 	// restore url
-	url, found := server.DB.Urls[shortUrl]
+	url, found := server.DB.Urls[shortURL]
 	if !found {
 		err = errors.New("url not found")
 		return
