@@ -9,13 +9,13 @@ import (
 	"urlshortener/internal/app/storage"
 )
 
-type UsApp struct {
+type UsServer struct {
 	Cfg    config.Config
 	DB     *storage.URLShortener
 	Router *gin.Engine
 }
 
-func New() (*UsApp, error) {
+func New() (*UsServer, error) {
 	// config
 	cfg, err := config.Load()
 	if err != nil {
@@ -31,7 +31,7 @@ func New() (*UsApp, error) {
 	router := gin.New()
 
 	// init server data
-	server := &UsApp{
+	server := &UsServer{
 		Cfg:    *cfg,
 		DB:     dbClient,
 		Router: router,
@@ -43,9 +43,9 @@ func New() (*UsApp, error) {
 	return server, nil
 }
 
-func (app *UsApp) Run() error {
-	port := app.Cfg.Port
+func (server *UsServer) Run() error {
+	port := server.Cfg.Port
 	addr := fmt.Sprintf(":%s", port)
 
-	return app.Router.Run(addr)
+	return server.Router.Run(addr)
 }

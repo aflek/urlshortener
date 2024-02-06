@@ -13,7 +13,7 @@ import (
 )
 
 // Create short url
-func (server *UsApp) CreateShortURL(c *gin.Context) {
+func (server *UsServer) CreateShortURL(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "text/plain; charset=utf-8")
 
 	var err error
@@ -51,7 +51,7 @@ func (server *UsApp) CreateShortURL(c *gin.Context) {
 }
 
 // Find short url
-func (server *UsApp) FindShortURL(c *gin.Context) {
+func (server *UsServer) FindShortURL(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "text/plain; charset=utf-8")
 
 	var err error
@@ -77,7 +77,7 @@ func generateShortKey() string {
 	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	const keyLength = 8
 
-	rand.Seed(time.Now().UnixNano())
+	rand.NewSource(time.Now().UnixNano())
 	shortKey := make([]byte, keyLength)
 	for i := range shortKey {
 		shortKey[i] = charset[rand.Intn(len(charset))]
