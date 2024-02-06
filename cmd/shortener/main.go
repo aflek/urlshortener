@@ -3,11 +3,11 @@ package main
 import (
 	"log"
 
-	us "urlshortener/internal/http-server"
+	server "urlshortener/internal/app/http-server"
 )
 
 func main() {
-	server, err := us.New()
+	server, err := server.New()
 	if err != nil {
 		log.Fatal(err)
 	}
