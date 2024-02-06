@@ -33,7 +33,7 @@ func main() {
 		}
 
 		if b != nil {
-			server.Cfg.RedirectHost = *b
+			server.Cfg.BaseURL = *b
 		}
 	}
 

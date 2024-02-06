@@ -42,7 +42,7 @@ func (server *UsApp) CreateShortUrl(c *gin.Context) {
 	id := generateShortKey()
 
 	// make short url
-	shortURL := fmt.Sprintf("http://%s/%s", server.Cfg.RedirectHost, id)
+	shortURL := fmt.Sprintf("http://%s/%s", server.Cfg.BaseURL, id)
 
 	// save url (to map as tmp)
 	server.Db.Urls[id] = url
