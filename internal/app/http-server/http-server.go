@@ -11,7 +11,7 @@ import (
 
 type UsApp struct {
 	Cfg    config.Config
-	Db     *storage.URLShortener
+	DB     *storage.URLShortener
 	Router *gin.Engine
 }
 
@@ -33,7 +33,7 @@ func New() (*UsApp, error) {
 	// init server data
 	server := &UsApp{
 		Cfg:    *cfg,
-		Db:     dbClient,
+		DB:     dbClient,
 		Router: router,
 	}
 

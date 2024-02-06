@@ -45,7 +45,7 @@ func (server *UsApp) CreateShortUrl(c *gin.Context) {
 	shortURL := fmt.Sprintf("http://%s/%s", server.Cfg.BaseURL, id)
 
 	// save url (to map as tmp)
-	server.Db.Urls[id] = url
+	server.DB.Urls[id] = url
 
 	c.String(http.StatusCreated, shortURL)
 }
@@ -63,7 +63,7 @@ func (server *UsApp) FindShortUrl(c *gin.Context) {
 
 	shortUrl := c.Param("id")
 	// restore url
-	url, found := server.Db.Urls[shortUrl]
+	url, found := server.DB.Urls[shortUrl]
 	if !found {
 		err = errors.New("url not found")
 		return
