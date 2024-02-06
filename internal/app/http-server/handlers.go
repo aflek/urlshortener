@@ -13,7 +13,7 @@ import (
 )
 
 // Create short url
-func (server *UsApp) CreateShortUrl(c *gin.Context) {
+func (server *UsApp) CreateShortURL(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "text/plain; charset=utf-8")
 
 	var err error
@@ -51,7 +51,7 @@ func (server *UsApp) CreateShortUrl(c *gin.Context) {
 }
 
 // Find short url
-func (server *UsApp) FindShortUrl(c *gin.Context) {
+func (server *UsApp) FindShortURL(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "text/plain; charset=utf-8")
 
 	var err error

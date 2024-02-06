@@ -1,6 +1,6 @@
 package httpserver
 
 func (server *UsApp) Routes() {
-	server.Router.POST("/", server.CreateShortUrl)
-	server.Router.GET("/:id", server.FindShortUrl)
+	server.Router.POST("/", server.CreateShortURL)
+	server.Router.GET("/:id", server.FindShortURL)
 }
