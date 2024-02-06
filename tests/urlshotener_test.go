@@ -61,7 +61,7 @@ func TestHendlers(t *testing.T) {
 	}
 
 	// init params
-	var keyUrl string           // key for short url
+	var keyURL string           // key for short url
 	server, err := server.New() // server params
 	if err != nil {
 		t.Fatal(err)
@@ -73,8 +73,8 @@ func TestHendlers(t *testing.T) {
 			reqBody := strings.NewReader(tt.body)
 
 			// define request
-			if tt.method == http.MethodGet && keyUrl != "" {
-				tt.request = fmt.Sprintf("/%s", keyUrl)
+			if tt.method == http.MethodGet && keyURL != "" {
+				tt.request = fmt.Sprintf("/%s", keyURL)
 			}
 
 			// run handler
@@ -88,7 +88,7 @@ func TestHendlers(t *testing.T) {
 
 			// get key for short url
 			u, _ := url.Parse(resBody)
-			keyUrl = path.Base(u.Path)
+			keyURL = path.Base(u.Path)
 
 			// assert
 			assert.Equal(t, tt.want.statusCode, w.Code)
