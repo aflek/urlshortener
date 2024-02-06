@@ -84,6 +84,7 @@ func TestHendlers(t *testing.T) {
 
 			// handler result
 			res := w.Result()
+			defer res.Body.Close()
 			resBody := w.Body.String()
 
 			// get key for short url
