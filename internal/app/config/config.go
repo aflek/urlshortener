@@ -10,6 +10,9 @@ type Config struct {
 
 	Host string `env:"HOST" envDefault:"localhost"`
 	Port string `env:"ADDR" envDefault:"8080"`
+
+	// response
+	RedirectHost string `env:"HOST" envDefault:"localhost:8080"`
 }
 
 func Load() (*Config, error) {
