@@ -33,7 +33,7 @@ func main() {
 		}
 
 		if b != nil {
-			server.Cfg.BaseURL = strings.Trim(*b, `http://`)
+			server.Cfg.BaseURL = strings.ReplaceAll(*b, "http://", "")
 		}
 	}
 	err = server.Run()
