@@ -16,7 +16,7 @@ func main() {
 	}
 
 	// Обработка данных из командной строки
-	// пример: go run cmd/shortener/main.go -a=localhost:8888 -b=localhost:8080
+	// пример: go run cmd/shortener/main.go -a=localhost:8888 -b= http://localhost:8080
 	if len(os.Args) > 1 {
 		// define flags
 		a := flag.String("a", "", "server url (format: localhost:8888)")
@@ -33,10 +33,9 @@ func main() {
 		}
 
 		if b != nil {
-			server.Cfg.BaseURL = *b
+			server.Cfg.BaseURL = strings.Trim(*b, `http://`)
 		}
 	}
-
 	err = server.Run()
 	if err != nil {
 		log.Fatal(err)
