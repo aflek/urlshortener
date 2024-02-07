@@ -25,3 +25,7 @@ func Load() (*Config, error) {
 	}
 	return &cfg, nil
 }
+
+func ABC() (s string) {
+	return "aaabbb"
+}
