@@ -42,10 +42,10 @@ func (server *UsServer) CreateShortURL(c *gin.Context) {
 	id := generateShortKey()
 
 	// make short url
-	shortURL := fmt.Sprintf("http://%s/%s", server.Cfg.BaseURL, id)
+	shortURL := fmt.Sprintf("%s/%s", server.Cfg.BaseURL, id)
 
 	// save url (to map as tmp)
-	server.DB.Urls[id] = url
+	server.DB.URLs[id] = url
 
 	c.String(http.StatusCreated, shortURL)
 }
@@ -63,7 +63,7 @@ func (server *UsServer) FindShortURL(c *gin.Context) {
 
 	shortURL := c.Param("id")
 	// restore url
-	url, found := server.DB.Urls[shortURL]
+	url, found := server.DB.URLs[shortURL]
 	if !found {
 		err = errors.New("url not found")
 		return
@@ -77,7 +77,7 @@ func generateShortKey() string {
 	const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 	const keyLength = 8
 
-	rand.NewSource(time.Now().UnixNano())
+	rand.Seed(time.Now().UnixNano())
 	shortKey := make([]byte, keyLength)
 	for i := range shortKey {
 		shortKey[i] = charset[rand.Intn(len(charset))]

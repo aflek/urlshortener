@@ -10,7 +10,7 @@ import (
 	"testing"
 
 	"github.com/stretchr/testify/assert"
-	server "urlshortener/internal/app/http-server"
+	server "urlshortener/internal/app/http_server"
 )
 
 const (

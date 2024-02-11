@@ -1,8 +1,6 @@
 package httpserver
 
 import (
-	"fmt"
-
 	"github.com/gin-gonic/gin"
 
 	"urlshortener/internal/app/config"
@@ -44,8 +42,6 @@ func New() (*UsServer, error) {
 }
 
 func (server *UsServer) Run() error {
-	port := server.Cfg.Port
-	addr := fmt.Sprintf(":%s", port)
-
+	addr := server.Cfg.ServerAddress
 	return server.Router.Run(addr)
 }
