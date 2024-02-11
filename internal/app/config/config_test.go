@@ -13,7 +13,7 @@ func TestLoad(t *testing.T) {
 	}{
 		{
 			name: "test BaseURL default value",
-			want: "localhost:8080",
+			want: "http://localhost:8080",
 		},
 		{
 			name: "test ServerAddress default value",
@@ -21,10 +21,16 @@ func TestLoad(t *testing.T) {
 		},
 	}
 
-	for _, tt := range tests {
+	got, _ := Load()
+
+	for i, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			got, _ := Load()
-			assert.Equal(t, got.BaseURL, tt.want)
+			switch i {
+			case 0:
+				assert.Equal(t, got.BaseURL, tt.want)
+			case 1:
+				assert.Equal(t, got.ServerAddress, tt.want)
+			}
 		})
 	}
 }
