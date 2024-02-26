@@ -11,7 +11,7 @@ import (
 
 func TestUsServer_CreateShortURL(t *testing.T) {
 	type fields struct {
-		Cfg    config.Config
+		Cfg    *config.Config
 		DB     *storage.URLShortener
 		Router *gin.Engine
 	}

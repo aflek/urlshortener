@@ -10,8 +10,14 @@ import (
 type Config struct {
 	// Адрес запуска HTTP-сервера
 	ServerAddress string `env:"SERVER_ADDRESS"`
+
 	// Базовый адрес результирующего сокращённого URL
 	BaseURL string `env:"BASE_URL"`
+
+	// Куда пишем лог
+	LoggerPath string `env:"LOGGER_PATH" envDefault:""`
+	// Уровень логирования
+	LoggerLevel string `env:"LOGGER_LEVEL" envDefault:"info"`
 }
 
 func Load() (*Config, error) {
