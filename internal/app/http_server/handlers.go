@@ -12,6 +12,54 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+type ShortenRq struct {
+	URL string `json:"url"`
+}
+type ShortenRs struct {
+	Result string `json:"result"`
+}
+
+// Create short url (json request/response)
+func (server *UsServer) Shorten(c *gin.Context) {
+	var (
+		rq  ShortenRq
+		rs  ShortenRs
+		err error
+	)
+
+	c.Writer.Header().Set("Content-Type", "application/json; charset=utf-8")
+
+	defer func() {
+		if err != nil {
+			c.Status(http.StatusBadRequest)
+		}
+	}()
+
+	if err = c.ShouldBindJSON(&rq); err != nil {
+		err = errors.New("request bind error")
+		return
+	}
+
+	url := rq.URL
+	if url == "" {
+		err = errors.New("body is empty")
+		return
+	}
+
+	// make id for short key
+	id := generateShortKey()
+
+	// make short url
+	shortURL := fmt.Sprintf("%s/%s", server.Cfg.BaseURL, id)
+
+	// save url (to map as tmp)
+	server.DB.URLs[id] = url
+
+	// make response
+	rs.Result = shortURL
+	c.JSON(http.StatusOK, rs)
+}
+
 // Create short url
 func (server *UsServer) CreateShortURL(c *gin.Context) {
 	c.Writer.Header().Set("Content-Type", "text/plain; charset=utf-8")
