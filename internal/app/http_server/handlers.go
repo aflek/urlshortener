@@ -27,6 +27,7 @@ func (server *UsServer) Shorten(c *gin.Context) {
 		err error
 	)
 
+	c.Header("Content-Encoding", "gzip")
 	c.Writer.Header().Set("Content-Type", "application/json; charset=utf-8")
 
 	defer func() {

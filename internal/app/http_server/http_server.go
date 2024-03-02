@@ -1,6 +1,9 @@
 package httpserver
 
 import (
+	//"compress/gzip"
+	"github.com/gin-contrib/gzip"
+
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 
@@ -38,6 +41,11 @@ func New() (*UsServer, error) {
 
 	// middleware
 	router.Use(middleware.Logger(logger, cfg))
+	// не могу разобраться почему моя функция не перезаписывает заголовок gin
+	// временно ее выключил:
+	// router.Use(middleware.Gzip(gzip.BestSpeed))
+	// а вот из пакета, работает и аналогичным образом перезаписывает:
+	router.Use(gzip.Gzip(gzip.DefaultCompression))
 
 	// init server data
 	server := &UsServer{
