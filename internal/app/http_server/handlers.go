@@ -27,7 +27,6 @@ func (server *UsServer) Shorten(c *gin.Context) {
 		err error
 	)
 
-	c.Header("Content-Encoding", "gzip")
 	c.Writer.Header().Set("Content-Type", "application/json; charset=utf-8")
 
 	defer func() {
@@ -55,6 +54,7 @@ func (server *UsServer) Shorten(c *gin.Context) {
 
 	// save url (to map as tmp)
 	server.DB.URLs[id] = url
+	server.DB.UpdateFile(server.Cfg.FileStoragePath, id)
 
 	// make response
 	rs.Result = shortURL
@@ -95,6 +95,7 @@ func (server *UsServer) CreateShortURL(c *gin.Context) {
 
 	// save url (to map as tmp)
 	server.DB.URLs[id] = url
+	server.DB.UpdateFile(server.Cfg.FileStoragePath, id)
 
 	c.String(http.StatusCreated, shortURL)
 }

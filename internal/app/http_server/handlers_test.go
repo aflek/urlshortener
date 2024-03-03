@@ -49,7 +49,7 @@ func TestShorten(t *testing.T) {
 	}
 
 	// db
-	dbClient := storage.New()
+	dbClient := storage.New(cfg)
 
 	// router
 	router := gin.New()

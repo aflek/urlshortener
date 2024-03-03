@@ -34,7 +34,7 @@ func New() (*UsServer, error) {
 	}
 
 	// db
-	dbClient := storage.New()
+	dbClient := storage.New(cfg)
 
 	// router
 	router := gin.New()
