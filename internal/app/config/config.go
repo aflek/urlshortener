@@ -10,8 +10,17 @@ import (
 type Config struct {
 	// Адрес запуска HTTP-сервера
 	ServerAddress string `env:"SERVER_ADDRESS"`
+
 	// Базовый адрес результирующего сокращённого URL
 	BaseURL string `env:"BASE_URL"`
+
+	// Куда пишем лог
+	LoggerPath string `env:"LOGGER_PATH" envDefault:""`
+	// Уровень логирования
+	LoggerLevel string `env:"LOGGER_LEVEL" envDefault:"info"`
+
+	// File Storage Path
+	FileStoragePath string `env:"FILE_STORAGE_PATH" envDefault:"/tmp/short-url-db.json"`
 }
 
 func Load() (*Config, error) {
@@ -32,6 +41,7 @@ func Load() (*Config, error) {
 		// define flags
 		a := flag.String("a", "", "server url (format: localhost:8888)")
 		b := flag.String("b", "", "response url (format: localhost:8080)")
+		f := flag.String("f", "", "storage file (default: /tmp/short-url-db.json)")
 
 		flag.Parse()
 
@@ -41,6 +51,10 @@ func Load() (*Config, error) {
 
 		if b != nil && cfg.BaseURL == "" {
 			cfg.BaseURL = *b
+		}
+
+		if f != nil && cfg.FileStoragePath == "" {
+			cfg.FileStoragePath = *f
 		}
 	}
 
