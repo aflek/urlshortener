@@ -58,7 +58,7 @@ func (server *UsServer) Shorten(c *gin.Context) {
 
 	// make response
 	rs.Result = shortURL
-	c.JSON(http.StatusOK, rs)
+	c.JSON(http.StatusCreated, rs)
 }
 
 // Create short url

@@ -37,7 +37,7 @@ func TestShorten(t *testing.T) {
 			bodyURL: "https://practicum.yandex.ru",
 			want: want{
 				contentType: "application/json; charset=utf-8",
-				statusCode:  http.StatusOK,
+				statusCode:  http.StatusCreated,
 			},
 		},
 	}
@@ -87,7 +87,7 @@ func TestShorten(t *testing.T) {
 			// test results
 			assert.Equal(t, tt.want.statusCode, w.Code)
 			assert.Equal(t, tt.want.contentType, result.Header.Get("Content-Type"))
-			if w.Code == http.StatusOK {
+			if w.Code == http.StatusCreated {
 				assert.NotEmpty(t, resp.Result)
 			}
 		})

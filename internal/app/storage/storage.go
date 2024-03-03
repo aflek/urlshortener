@@ -16,8 +16,8 @@ type URLShortener struct {
 
 type Event struct {
 	UUID        string `json:"uuid"`
-	ShortUrl    string `json:"short_url"`
-	OriginalUrl string `json:"original_url"`
+	ShortURL    string `json:"short_url"`
+	OriginalURL string `json:"original_url"`
 }
 
 func New(cfg *config.Config) *URLShortener {
@@ -67,7 +67,7 @@ func RestoreFromFile(filename string) (map[string]string, error) {
 			continue
 		}
 
-		URLs[event.ShortUrl] = event.OriginalUrl
+		URLs[event.ShortURL] = event.OriginalURL
 
 	}
 
@@ -82,8 +82,8 @@ func (u URLShortener) UpdateFile(filename string, key string) error {
 	if v, ok := u.URLs[key]; ok {
 		e := Event{
 			UUID:        fmt.Sprintf("%v", len(u.URLs)),
-			ShortUrl:    key,
-			OriginalUrl: v,
+			ShortURL:    key,
+			OriginalURL: v,
 		}
 
 		r, err := json.Marshal(e)
